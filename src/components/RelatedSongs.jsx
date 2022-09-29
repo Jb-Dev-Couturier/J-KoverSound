@@ -2,23 +2,25 @@ import  SongBar  from './SongBar';
 
 const RelatedSongs = ({
   data,
+  artistId,
   isPlaying,
   activeSong,
-  handlePause,
-  handlePlay,
-  artistId,
+  handlePauseClick,
+  handlePlayClick,
 }) => (
   <div className="flex flex-col">
     <h1 className="font-bold text-3xl text-lime-200">Chansons liées :</h1>
     <div className="mt-6 w-full flex flex-col">
       {data?.map((song, i) => (
-        <SongBar key={`${song.key}-${artistId}`} 
-        song={song}
-        i={i}
-        isPlaying={isPlaying}
-        activeSong={activeSong}
-        handlePauseClick={handlePause}
-        handlePlayClick={handlePlay}
+        <SongBar
+          key={`${artistId}-${song.key}-${i}`}
+          song={song}
+          i={i}
+          artistId={artistId}
+          isPlaying={isPlaying}
+          activeSong={activeSong}
+          handlePauseClick={handlePauseClick}
+          handlePlayClick={handlePlayClick}
         />
       ))}
     </div>

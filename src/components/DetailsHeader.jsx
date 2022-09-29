@@ -10,8 +10,10 @@ const DetailsHeader = ({ artistId, artistData, songData }) => {
         <img
           src={
             artistId
-              ? artist.artwork?.url.replace('{w}', '500').replace('{h}', '500')
-              : songData?.images.coverart
+              ? artistData?.artists[artistId].attributes?.artwork?.url
+                  .replace('{w}', '500')
+                  .replace('{h}', '500')
+              : songData?.images?.coverart
           }
           alt="art"
           className="sm:w-48 w-28 sm:h-48 h-28 rounded-full object-cover border-2 shadow-xl shadow-black"
@@ -19,10 +21,12 @@ const DetailsHeader = ({ artistId, artistData, songData }) => {
 
         <div className="ml-5">
           <p className="font-bold sm:text-3xl text-xl text-lime-400">
-            {artistId ? artist?.name : songData?.title}
+            {artistId
+              ? artistData?.artists[artistId].attributes?.name
+              : songData?.title}
           </p>
           {!artistId && (
-            <Link to={`/artists/${songData?.artists[0].adamid}`}>
+            <Link to={`/artists/${songData?.artists[0]?.adamid}`}>
               <p className="text-base text-lime-200 mt-2">
                 {songData?.subtitle}
               </p>
@@ -30,12 +34,12 @@ const DetailsHeader = ({ artistId, artistData, songData }) => {
           )}
           <p className="text-base text-lime-600 mt-2">
             {artistId
-              ?artist?.genreNames[0]:
-              songData?.genres?.primary}
+              ? artistData?.artists[artistId].attributes?.genreNames[0]
+              : songData?.genres?.primary}
           </p>
         </div>
       </div>
-          <div className='w-full sm:h-44 h-24'/>
+      <div className="w-full sm:h-44 h-24" />
     </div>
   );
 };

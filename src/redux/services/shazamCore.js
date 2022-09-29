@@ -9,6 +9,7 @@ export const shazamCoreApi = createApi({
         'X-RapidAPI-Key',
         '5184167115mshee68cce67fd28e5p12e42cjsn5c019554b72a'
       );
+
       return headers;
     },
   }),
@@ -17,9 +18,18 @@ export const shazamCoreApi = createApi({
     getSongDetails: builder.query({
       query: ({ songid }) => `/tracks/details?track_id=${songid}`,
     }),
-    getSongRelated:builder.query({query: ({ songid })=>`/tracks/related?track_id=${songid}`})
+    getSongRelated: builder.query({
+      query: ({ songid }) => `/tracks/related?track_id=${songid}`,
+    }),
+    getArtistDetails: builder.query({
+      query: (artistId) => `/artists/details?artist_id=${artistId}`,
+    }),
   }),
 });
 
-export const { useGetTopChartsQuery, useGetSongDetailsQuery, useGetSongRelatedQuery } =
-  shazamCoreApi;
+export const {
+  useGetTopChartsQuery,
+  useGetSongDetailsQuery,
+  useGetSongRelatedQuery,
+  useGetArtistDetailsQuery,
+} = shazamCoreApi;

@@ -9,12 +9,12 @@ import {
 
 const SongDetails = () => {
   const dispatch = useDispatch();
-  const { songid } = useParams();
+  const { songid, id: artistId } = useParams();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const handlePauseClick = () => {
     dispatch(playPause(false));
   };
-  const handlePlayClick = (song,i) => {
+  const handlePlayClick = (song, i) => {
     dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
   };
@@ -33,7 +33,7 @@ const SongDetails = () => {
 
   return (
     <div className="flex flex-col">
-      <DetailsHeader artistId={''} songData={songData} />
+      <DetailsHeader artistId={artistId} songData={songData} />
       <div className="mb-10">
         <h2 className="text-lime-100 text-3xl font-bold">Paroles :</h2>
         <div className="mt-5">
@@ -48,10 +48,11 @@ const SongDetails = () => {
       </div>
       <RelatedSongs
         data={data}
+        artistId={artistId}
         isPlaying={isPlaying}
         activeSong={activeSong}
-        handlePause={handlePauseClick}
-        handlePlay={handlePlayClick}
+        handlePauseClick={handlePauseClick}
+        handlePlayClick={handlePlayClick}
       />
     </div>
   );
